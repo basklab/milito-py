@@ -1,9 +1,23 @@
+from abc import abstractmethod, ABC
 from dataclasses import dataclass
+
+from shared.dtos import CardDTO
 
 
 @dataclass
-class Card:
+class Card(ABC):
     idx: int = 0
+
+    @property
+    @abstractmethod
+    def unit_type(self):
+        pass
+
+    def to_dto(self):
+        return CardDTO(
+            idx=self.idx,
+            unit_type=self.unit_type,
+        )
 
 
 @dataclass

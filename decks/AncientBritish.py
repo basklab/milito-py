@@ -1,6 +1,5 @@
-from typing import List
-
-from entity.card import UnitCard, LeaderCard, Card
+from decks.common import slingers, light_cavalry
+from entity.card import UnitCard, LeaderCard
 from entity.deck import Deck
 
 
@@ -10,12 +9,8 @@ def ancient_british():
     unit_specs += 6 * [slingers]
     unit_specs += 6 * [chariots]
     unit_specs += 4 * [light_cavalry]
-    result: List[Card] = []
-    result += leader_cards
-    result += [UnitCard(**card.__dict__) for card in unit_specs]
-    for i, card in enumerate(result):
-        card.idx = i
-    return Deck(result)
+    unit_cards = [UnitCard(**card.__dict__) for card in unit_specs]
+    return Deck.make(leader_cards=leader_cards, unit_cards=unit_cards)
 
 
 leader_cards = [
@@ -65,24 +60,9 @@ warband_medium_infantry = UnitCard(
     defence_strength=2,
 )
 
-slingers = UnitCard(
-    unit_type="Slingers",
-    speed=3,
-    attack_strength=1,
-    defence_strength=1,
-    combine_ability=True,
-)
-
 chariots = UnitCard(
     unit_type="Chariots",
     speed=3,
     attack_strength=4,
     defence_strength=2,
-)
-
-light_cavalry = UnitCard(
-    unit_type="Light_Cavalry",
-    speed=5,
-    attack_strength=1,
-    defence_strength=1,
 )
