@@ -1,6 +1,10 @@
 import json
+import os
+
+import yaml
 
 from decks.AncientBritish import ancient_british
+from decks.common import CONFIG_PATH
 from shared.dtos import DTO
 
 
@@ -15,6 +19,12 @@ def to_json(item, depth=None):
 
 
 def main():
+    tmp = os.path.join(CONFIG_PATH, "decks", "AncientBritish.yaml")
+    with open(tmp, 'r') as stream:
+        print(yaml.safe_load(stream))
+
+
+def main2():
     deck = ancient_british()
 
     dto = deck.to_dto()

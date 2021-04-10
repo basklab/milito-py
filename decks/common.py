@@ -1,7 +1,11 @@
+import os
+
 from entity.card import UnitCard
 import random
 
 from entity.deck import Deck
+
+CONFIG_PATH = os.path.join(os.path.dirname(__file__), os.path.pardir, 'config')
 
 light_cavalry = UnitCard(
     unit_type="Light_Cavalry",
